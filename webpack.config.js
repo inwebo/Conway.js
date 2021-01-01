@@ -5,7 +5,7 @@ module.exports = {
     entry: {
         main: './src/index.js',
         app: './docs/assets/js/app.js',
-        demos: glob.sync('./docs/assets/js/demos/*')
+        demos: glob.sync('./docs/assets/js/demos/demo-1.js')
     },
     output: {
         filename: (pathData) => {
