@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@inwebo/grid.js": "github:inwebo/grid.js",
-    "@inwebo/render.js": "github:inwebo/render.js"
+    "@inwebo/render.js": "github:inwebo/render.js",
+    "@inwebo/vector": "^0.0.11"
   }
 }
