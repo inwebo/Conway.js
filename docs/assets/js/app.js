@@ -3,7 +3,7 @@ import CellGol    from "./CellGol";
 import {Vector2D} from "@inwebo/vector"
 import RenderGol  from "./renderGol";
 
-window.addEventListener("DOMContentLoaded", (event) => {
+window.addEventListener("DOMContentLoaded", () => {
     const rand = (a,b) => a+(b-a+1)*crypto.getRandomValues(new Uint32Array(1))[0]/2**32|0;
     const golCanvas = document.getElementById('demo-2');
     const gol = new Gol(new Vector2D(150, 96), null, ([col, row]) => {
