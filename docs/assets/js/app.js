@@ -6,7 +6,7 @@ import RenderGol  from "./renderGol";
 window.addEventListener("DOMContentLoaded", () => {
     const rand = (a,b) => a+(b-a+1)*crypto.getRandomValues(new Uint32Array(1))[0]/2**32|0;
     const golCanvas = document.getElementById('demo-2');
-    const gol = new Gol(new Vector2D(150, 96), null, ([col, row]) => {
+    const gol = new Gol(new Vector2D(150, 150), null, ([col, row]) => {
         return new CellGol(new Vector2D(col, row));
     });
     const renderGol = new RenderGol(golCanvas);

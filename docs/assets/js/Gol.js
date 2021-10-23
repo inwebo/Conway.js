@@ -13,8 +13,13 @@ export default class Gol extends Grid {
         const n = this._cartesian.getNeighbors(cell.getIndex());
         let aliveNeighbours = 0;
 
-        n.forEach((v, k)=> {
+        const wasAlive = cell.isAlive();
+
+        n.forEach((v)=> {
             if(this.hasCell(v.getX(), v.getY())) {
+                /**
+                 * @type {CellGol}
+                 */
                 const c = this.getCell(v.getX(), v.getY());
 
                 if(c.isAlive()) {
@@ -24,45 +29,66 @@ export default class Gol extends Grid {
         });
 
         if(cell.isAlive() && aliveNeighbours < 2) {
-            return false;
+            cell.setAlive(false);
+            // return false;
         }
 
         if(cell.isAlive() && (aliveNeighbours === 2 && aliveNeighbours === 3)) {
-            return true;
+            cell.setAlive(true);
+            // return true;
         }
 
         if(cell.isAlive() && aliveNeighbours > 3) {
-            return false;
+            // return false;
+            cell.setAlive(false);
         }
 
         if(!cell.isAlive() && aliveNeighbours === 3) {
-            return true;
+            cell.setAlive(true);
         }
 
-        return cell.isAlive();
+        const isAlive = cell.isAlive();
+
+        if (wasAlive !== isAlive) {
+            cell.setHasMutate(true);
+        }
     }
 
     update() {
-        const rows = new Array(this._dimensions.getY()).fill(this._defaultCellValue);
-        Object.seal(rows);
-        for(let y = 0; y < rows.length; y++) {
+        const rowsLength = this._dimensions.getY();
+        const colsLength = this._dimensions.getX();
 
-            let cols = [];
+        for(let y = 0; y < rowsLength; y++) {
 
-            for(let x = 0; x < this._dimensions.getX(); x++) {
+            for(let x = 0; x < colsLength; x++) {
                 const cell = this.getCell(x, y);
-                const mustLive = this.mustLive(cell);
-
-                const newCell = new CellGol(new Vector2D(x, y));
-
-
-                newCell.setAlive(mustLive);
-                cols.push(newCell);
+                this.mustLive(cell);
             }
-            Object.seal(cols);
-            rows[y] = cols;
         }
 
-        this._rows = rows;
+        // const rows = new Array(this._dimensions.getY()).fill(this._defaultCellValue);
+        // Object.seal(rows);
+        //
+        // const rowsLength = rows.length;
+        //
+        // for(let y = 0; y < rowsLength; y++) {
+        //
+        //     let cols = [];
+        //
+        //     const colsLength = this._dimensions.getX();
+        //
+        //     for(let x = 0; x < colsLength; x++) {
+        //         const cell = this.getCell(x, y);
+        //         const mustLive = this.mustLive(cell);
+        //         const newCell = new CellGol(new Vector2D(x, y));
+        //
+        //         newCell.setAlive(mustLive);
+        //         cols.push(newCell);
+        //     }
+        //     Object.seal(cols);
+        //     rows[y] = cols;
+        // }
+        //
+        // this._rows = rows;
     }
 }

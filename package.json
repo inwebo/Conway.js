@@ -15,6 +15,9 @@
     "type": "git",
     "url": "https://github.com/inwebo/npm-boilerplate.git"
   },
+  "scripts": {
+    "build": "webpack --mode=development --watch"
+  },
   "homepage": "https://inwebo.github.io/npm-boilerplate/",
   "author": "inwebo-veritas",
   "license": "GPL-3.0",

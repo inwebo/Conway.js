@@ -15,10 +15,12 @@ export default class RenderGol extends Renderer2D {
         for (let cell of cells) {
             const origin = new Vector2D(cell.getIndex().getX() * tileSize.getX(), cell.getIndex().getY() * tileSize.getY());
 
-            if(cell.isAlive()) {
-                this._ctx.fillStyle = 'black';
-            } else {
-                this._ctx.fillStyle = 'white';
+            if(cell.hasMutate()) {
+                if(cell.isAlive()) {
+                    this._ctx.fillStyle = 'black';
+                } else {
+                    this._ctx.fillStyle = 'white';
+                }
             }
 
             this._ctx.fillRect(
